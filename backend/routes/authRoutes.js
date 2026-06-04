@@ -1,12 +1,23 @@
-// routes/authRoutes.js
 const express = require('express');
 const router = express.Router();
+const { register, login, getMe, updateProfile } = require('../controllers/authController');
+const { protect } = require('../middleware/authMiddleware');
 
-// Auth routes — to be implemented
-router.get('/test', (req, res) => {
-    // This is just a test route to verify that the auth routes are working
-    res.json({ success: true, message: 'Auth route working' });
-});
+// Public routes
+// POST /api/auth/register
+router.post('/register', register);
+
+// POST /api/auth/login
+router.post('/login', login);
+
+// Protected routes
+// GET /api/auth/me
+router.get('/me', protect, getMe);
+
+// PUT /api/auth/profile
+router.put('/profile', protect, updateProfile);
 
 // Future routes to implement:
+// - POST /api/auth/logout
+// - POST /api/auth/refresh-token
 module.exports = router;
