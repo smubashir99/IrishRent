@@ -1,20 +1,83 @@
-// Database connection setup using Mongoose ODM
-const mongoose = require('mongoose');
+const Database = require('better-sqlite3');
+const path = require('path');
 
-// MongoDB connection configuration
-// Ref: https://mongoosejs.com/docs/connections.html
-const connectDB = async () => {
-    try {
-        // Connect to MongoDB using the connection string from environment variables
-        const conn = await mongoose.connect(process.env.MONGODB_URI);
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-        return conn;
-        // Note: The connection object can be used for further operations if needed
-    } catch (error) {
-        console.error(`Database connection failed: ${error.message}`);
-        process.exit(1);
-    }
+// SQLite database connection
+// Ref: https://github.com/WiseLibs/better-sqlite3
+const db = new Database(path.join(__dirname, '../irishrent.db'), {
+    verbose: console.log
+});
+
+// Enable foreign keys
+db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
+
+// Create tables
+const initDB = () => {
+    // Users table
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            role TEXT DEFAULT 'tenant',
+            phone TEXT,
+            avatar TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
+
+    // Properties table
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS properties (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL,
+            type TEXT NOT NULL,
+            price REAL NOT NULL,
+            bedrooms INTEGER NOT NULL,
+            bathrooms INTEGER NOT NULL,
+            area TEXT NOT NULL,
+            address TEXT NOT NULL,
+            available INTEGER DEFAULT 1,
+            images TEXT,
+            amenities TEXT,
+            landlord_id INTEGER NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (landlord_id) REFERENCES users(id)
+        )
+    `);
+
+    // Reviews table
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS reviews (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            rating INTEGER NOT NULL,
+            comment TEXT NOT NULL,
+            property_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (property_id) REFERENCES properties(id),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+    `);
+
+    // Bookmarks table
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS bookmarks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            property_id INTEGER NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (property_id) REFERENCES properties(id),
+            UNIQUE(user_id, property_id)
+        )
+    `);
+
+    console.log('IrishRent database initialized successfully');
 };
 
-// Export the connectDB function for use in other parts of the application
-module.exports = connectDB;
+initDB();
+
+module.exports = db;
