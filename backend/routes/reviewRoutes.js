@@ -1,11 +1,12 @@
-// routes/reviewRoutes.js
 const express = require('express');
 const router = express.Router();
-
-// Review routes — to be implemented
-router.get('/test', (req, res) => {
-    // This is just a test route to verify that the review routes are working
-    res.json({ success: true, message: 'Review route working' });
-});
-
+// Import controller functions and middleware
+const { getReviews, addReview, deleteReview } = require('../controllers/reviewController');
+const { protect } = require('../middleware/authMiddleware');
+// Public route to get reviews for a specific property by its ID, and a private route for authenticated tenants to add a review 
+// for a property.
+router.get('/:propertyId', getReviews);
+router.post('/:propertyId', protect, addReview);
+router.delete('/:id', protect, deleteReview);
+// Future routes to implement:
 module.exports = router;
