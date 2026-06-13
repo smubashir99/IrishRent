@@ -11,11 +11,11 @@ const Dashboard = () => {
     const [myProperties, setMyProperties] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
     const [loading, setLoading] = useState(true);
-// Load user-specific data on component mount
+    // Load user-specific data on component mount
     useEffect(() => {
         loadData();
     }, []);
-// Load dashboard data: landlord's properties and tenant's bookmarks
+    // Load dashboard data: landlord's properties and tenant's bookmarks
     const loadData = async () => {
         try {
             if (user?.role === 'landlord' || user?.role === 'admin') {
@@ -30,7 +30,7 @@ const Dashboard = () => {
             setLoading(false);
         }
     };
-// Handle bookmark removal for tenants
+    // Handle bookmark removal for tenants
     const handleRemoveBookmark = async (propertyId) => {
         try {
             await bookmarkAPI.remove(propertyId);
@@ -40,7 +40,7 @@ const Dashboard = () => {
             toast.error('Error removing bookmark');
         }
     };
-// Show loading state while fetching data
+    // Show loading state while fetching data
     if (loading) return <div className="loading">Loading dashboard...</div>;
 
     return (
@@ -59,7 +59,9 @@ const Dashboard = () => {
                     <p>{user?.role === 'tenant' ? 'Saved Properties' : 'My Listings'}</p>
                 </div>
                 <div className="dashboard-stat">
-                    <h3>{user?.email}</h3>
+                    <h3 style={{ fontSize: '1rem', wordBreak: 'break-all' }}>
+                        {user?.email}
+                    </h3>
                     <p>Email Address</p>
                 </div>
                 <div className="dashboard-stat">

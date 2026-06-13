@@ -319,7 +319,44 @@ body {
 
 .center-btn { text-align: center; margin-top: 2rem; }
 
-.how-it-works { background: var(--primary-light); padding: 2rem; border-radius: var(--radius); }
+.how-it-works { 
+    background: var(--primary-light); 
+    padding: 2rem; 
+    border-radius: var(--radius);
+    margin: 0 -2rem;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.step {
+    text-align: center;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.step-icon { 
+    font-size: 3rem; 
+    margin-bottom: 1rem; 
+    display: block;
+}
+
+.step h3 { 
+    color: var(--primary); 
+    margin-bottom: 0.5rem; 
+}
 
 .steps-grid {
     display: grid;
