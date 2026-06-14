@@ -94,9 +94,39 @@ const getProperties = (req, res) => {
         // Execute query
         const properties = db.prepare(query).all(...params);
 
-        // Total count
+       // Total count — build same WHERE conditions as main query
         let countQuery = 'SELECT COUNT(*) as total FROM properties p WHERE 1=1';
-        const countParams = params.slice(0, -2);
+        const countParams = [];
+
+        if (area) {
+            countQuery += ' AND LOWER(p.area) LIKE LOWER(?)';
+            countParams.push(`%${area}%`);
+        }
+        if (type) {
+            countQuery += ' AND p.type = ?';
+            countParams.push(type);
+        }
+        if (minPrice) {
+            countQuery += ' AND p.price >= ?';
+            countParams.push(parseFloat(minPrice));
+        }
+        if (maxPrice) {
+            countQuery += ' AND p.price <= ?';
+            countParams.push(parseFloat(maxPrice));
+        }
+        if (bedrooms) {
+            countQuery += ' AND p.bedrooms = ?';
+            countParams.push(parseInt(bedrooms));
+        }
+        if (available !== undefined) {
+            countQuery += ' AND p.available = ?';
+            countParams.push(available === 'true' ? 1 : 0);
+        }
+        if (search) {
+            countQuery += ' AND (LOWER(p.title) LIKE LOWER(?) OR LOWER(p.description) LIKE LOWER(?) OR LOWER(p.area) LIKE LOWER(?))';
+            countParams.push(`%${search}%`, `%${search}%`, `%${search}%`);
+        }
+
         const total = db.prepare(countQuery).get(...countParams);
         // The total count query is executed separately to get the total number of properties that match the filters 
         // (without pagination). This allows us to calculate the total number of pages and provide accurate pagination metadata 
