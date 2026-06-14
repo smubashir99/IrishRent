@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: irishrent
+    runtime: node
+    buildCommand: npm run render-build
+    startCommand: node backend/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: irishrent_super_secret_jwt_key_2026
+      - key: JWT_EXPIRE
+        value: 7d

@@ -1,0 +1,7 @@
+{
+  "name": "irishrent",
+  "version": "1.0.0",
+  "scripts": {
+    "render-build": "cd backend && npm install && cd ../frontend && npm install && npm run build"
+  }
+}

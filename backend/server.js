@@ -3,8 +3,12 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
-
+// Load environment variables from .env file
 dotenv.config();
+// Note: We use dotenv to manage environment variables, allowing us to easily configure our application for different environments 
+// (development, production, etc.) without hardcoding sensitive information in our codebase. Make sure to create a .env file in 
+// the root of your project with the necessary variables (e.g., PORT, MONGO_URI, JWT_SECRET, CLIENT_URL).
+const path = require('path');
 
 // Initialize database
 require('./config/db');
