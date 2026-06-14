@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import AddProperty from './pages/AddProperty';
 import NotFound from './pages/NotFound';
+import EditProperty from './pages/EditProperty';
 
 // Components
 import Navbar from './components/common/Navbar';
@@ -43,6 +44,11 @@ function App() {
                             <Route path="/add-property" element={
                                 <PrivateRoute roles={['landlord', 'admin']}>
                                     <AddProperty />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/edit-property/:id" element={
+                                <PrivateRoute roles={['landlord', 'admin']}>
+                                    <EditProperty />
                                 </PrivateRoute>
                             } />
                             <Route path="*" element={<NotFound />} />
