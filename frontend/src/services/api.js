@@ -3,8 +3,20 @@ import axios from 'axios';
 // API base URL
 // Ref: https://axios-http.com/docs/instance
 // Note: In production, set REACT_APP_API_URL in .env file to your backend URL
+/////////////////////
+//const API = axios.create({
+  //  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+    //headers: {
+      //  'Content-Type': 'application/json'
+   // }
+//});
+
+///////////
+
 const API = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+    baseURL: process.env.NODE_ENV === 'production' 
+        ? '/api' 
+        : (process.env.REACT_APP_API_URL || 'http://localhost:5000/api'),
     headers: {
         'Content-Type': 'application/json'
     }
@@ -73,4 +85,5 @@ export const bookmarkAPI = {
     remove: (propertyId) => API.delete(`/bookmarks/${propertyId}`),
 };
 
+// Admin endpoints
 export default API;
