@@ -133,6 +133,10 @@ const PropertyCard = ({ property }) => {
             <img
                 src={images[0] || 'https://via.placeholder.com/400x200?text=No+Image'}
                 alt={property.title}
+                onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://via.placeholder.com/400x200?text=No+Image';
+                }}
             />
             <div className="property-card-body">
                 <div className="property-card-header">
