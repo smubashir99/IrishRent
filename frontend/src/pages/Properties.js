@@ -4,13 +4,12 @@ import { propertyAPI } from '../services/api';
 import { PropertyCard } from './Home';
 import { toast } from 'react-toastify';
 
-// Properties listing page with search and filters
 const Properties = () => {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
     const [total, setTotal] = useState(0);
-    const [searchParams, setSearchParams] = useSearchParams();
-// Filters state
+    const [searchParams] = useSearchParams();
+
     const [filters, setFilters] = useState({
         search: searchParams.get('search') || '',
         area: '',
@@ -19,14 +18,14 @@ const Properties = () => {
         maxPrice: '',
         bedrooms: '',
     });
-// Load properties when component mounts or filters change
+
     useEffect(() => {
         loadProperties();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
-// Load properties based on filters
+
     const loadProperties = async () => {
         setLoading(true);
-        // We construct the params object by iterating over the filters state and only including those that have a value.
         try {
             const params = {};
             Object.keys(filters).forEach(key => {
@@ -41,11 +40,11 @@ const Properties = () => {
             setLoading(false);
         }
     };
-// Handle filter input changes — update filters state
+
     const handleFilter = (e) => {
         setFilters({ ...filters, [e.target.name]: e.target.value });
     };
-// Clear all filters
+
     const clearFilters = () => {
         setFilters({ search: '', area: '', type: '', minPrice: '', maxPrice: '', bedrooms: '' });
     };
@@ -59,7 +58,6 @@ const Properties = () => {
                 </button>
             </div>
 
-            {/* Filters */}
             <div className="filters">
                 <div className="filter-group">
                     <label>Search</label>
@@ -104,7 +102,7 @@ const Properties = () => {
                     </select>
                 </div>
             </div>
-// Properties grid
+
             {loading ? (
                 <div className="loading">Loading properties...</div>
             ) : properties.length === 0 ? (
