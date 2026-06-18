@@ -13,12 +13,21 @@ const db = require('./config/db');
 
 // AUTO-SEED ON FIRST START
 // Render resets SQLite on redeploy — auto seed fixes this
+//const checkUsers = db.prepare('SELECT COUNT(*) as count FROM users').get();
+//if (checkUsers.count === 0) {
+  //  console.log('No data found — running auto seed...');
+   // require('./seed-data');
+//}
+// END AUTO-SEED
+
+// AUTO-SEED ON FIRST START (IMPROVED) — also checks for old image URLs to trigger re-seeding with updated images
 const checkUsers = db.prepare('SELECT COUNT(*) as count FROM users').get();
-if (checkUsers.count === 0) {
-    console.log('No data found — running auto seed...');
+const checkOldImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%unsplash%'").get();
+
+if (checkUsers.count === 0 || checkOldImages.count > 0) {
+    console.log('Seeding/Re-seeding database with updated images...');
     require('./seed-data');
 }
-// END AUTO-SEED
 const app = express();
 
 
