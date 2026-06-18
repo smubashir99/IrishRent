@@ -20,16 +20,13 @@ const db = require('./config/db');
 //}
 // END AUTO-SEED
 
-// Check if users exist and if any property images are still placeholders
 const checkUsers = db.prepare('SELECT COUNT(*) as count FROM users').get();
-// Check if any property images are still placeholders
-const checkImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%placehold%'").get();
-// If no users or placeholder images exist, run seed-data.js to populate the database
-if (checkUsers.count === 0 || checkImages.count === 0) {
-    console.log('Seeding database...');
+const checkOldImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%unsplash%'").get();
+
+if (checkUsers.count === 0 || checkOldImages.count > 0) {
+    console.log('Seeding/Re-seeding database with updated images...');
     require('./seed-data');
 }
-
 const app = express();
 
 
