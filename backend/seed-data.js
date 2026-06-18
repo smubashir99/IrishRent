@@ -39,7 +39,7 @@ const seedData = async () => {
                 description: 'Beautiful studio apartment in the heart of Dublin. Close to all amenities, transport links, and universities.',
                 type: 'studio', price: 1800, bedrooms: 0, bathrooms: 1,
                 area: 'Dublin 1', address: "12 O'Connell Street, Dublin 1",
-                images: JSON.stringify(['https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800']),
+                images: JSON.stringify(['https://placehold.co/800x500/2E7D32/white?text=Studio+Dublin+1']),
                 amenities: JSON.stringify(['WiFi', 'Heating', 'Washing Machine'])
             },
             {
@@ -47,7 +47,7 @@ const seedData = async () => {
                 description: 'Spacious 2 bedroom apartment in popular Rathmines. Perfect for students or young professionals.',
                 type: 'apartment', price: 2400, bedrooms: 2, bathrooms: 1,
                 area: 'Rathmines', address: '45 Rathmines Road, Dublin 6',
-                images: JSON.stringify(['https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800']),
+                images: JSON.stringify(['https://placehold.co/800x500/1565C0/white?text=Apartment+Rathmines']),
                 amenities: JSON.stringify(['WiFi', 'Parking', 'Garden', 'Dishwasher'])
             },
             {
@@ -55,7 +55,7 @@ const seedData = async () => {
                 description: 'Lovely single room in a friendly shared house. Bills included. Great location near Luas stop.',
                 type: 'room', price: 950, bedrooms: 1, bathrooms: 1,
                 area: 'Ranelagh', address: '23 Ranelagh Village, Dublin 6',
-                images: JSON.stringify(['https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=800']),
+                images: JSON.stringify(['https://placehold.co/800x500/E65100/white?text=Room+Ranelagh']),
                 amenities: JSON.stringify(['WiFi', 'Bills Included', 'Luas Access'])
             },
             {
@@ -63,7 +63,7 @@ const seedData = async () => {
                 description: 'Stunning 3 bedroom house near the sea in Clontarf. Ideal for families or professional sharers.',
                 type: 'house', price: 3200, bedrooms: 3, bathrooms: 2,
                 area: 'Clontarf', address: '8 Vernon Avenue, Clontarf, Dublin 3',
-                images: JSON.stringify(['https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=800']),
+                images: JSON.stringify(['https://placehold.co/800x500/4A148C/white?text=House+Clontarf']),
                 amenities: JSON.stringify(['Garden', 'Parking', 'Washing Machine', 'Near Sea'])
             },
         ];
