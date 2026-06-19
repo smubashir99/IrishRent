@@ -46,7 +46,7 @@ const seedData = async () => {
         console.log('Tenant ID:', tenant.id);
 
         // Insert properties using actual landlord ID
-        const properties = [
+       const properties = [
             {
                 title: 'Modern Studio in Dublin City Centre',
                 description: 'Beautiful studio apartment in the heart of Dublin. Close to all amenities, transport links, and universities.',
