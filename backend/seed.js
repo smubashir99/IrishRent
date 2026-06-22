@@ -96,7 +96,6 @@ const seedData = async () => {
                 amenities: JSON.stringify(['Garden', 'Parking', 'Washing Machine', 'Near Sea'])
             },
         ];
-
         const insertProperty = db.prepare(`
             INSERT INTO properties
             (title, description, type, price, bedrooms, bathrooms,

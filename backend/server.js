@@ -21,8 +21,9 @@ const db = require('./config/db');
 // END AUTO-SEED
 
 const checkUsers = db.prepare('SELECT COUNT(*) as count FROM users').get();
-const checkOldImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%unsplash%'").get();
-
+//const checkOldImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%unsplash%'").get();
+// If no users or old placeholder images, seed with updated images
+const checkOldImages = db.prepare("SELECT COUNT(*) as count FROM properties WHERE images LIKE '%unsplash%' OR images LIKE '%pexels%' OR images LIKE '%placehold%'").get();
 if (checkUsers.count === 0 || checkOldImages.count > 0) {
     console.log('Seeding/Re-seeding database with updated images...');
     require('./seed-data');
@@ -31,7 +32,20 @@ const app = express();
 
 
 // SECURITY MIDDLEWARE
-app.use(helmet());
+//app.use(helmet());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "https:", "data:"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+      },
+    },
+  })
+);
 
 // CORS configuration
 app.use(cors({
