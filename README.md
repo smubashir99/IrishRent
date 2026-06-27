@@ -1,11 +1,16 @@
 # IrishRent 🏠
-## Student Accommodation Finder — Dublin, Ireland
+## Student Accommodation Finder - Dublin, Ireland
 
 **Student Name:** Syed Mubashir Ahmed Hashmi
+
 **Student ID:** 20089221
+
 **Programme:** MSc Information Systems with Computing
-**Module:** B9IS130 — Web Development for Information Systems
+
+**Module:** B9IS130 - Web Development for Information Systems
+
 **Lecturer:** Dr. Obinna Izima | Dublin Business School
+
 **Assignment:** CA1
 
 ---
@@ -15,7 +20,7 @@
 The application is deployed and running at: **https://irishrent.onrender.com**
 
 > Note: Render free plan sleeps after 15 minutes of inactivity.
-> First visit may take 30-60 seconds to wake up — this is normal.
+> First visit may take 30-60 seconds to wake up - this is normal.
 
 **Demo Login Credentials:**
 | Role | Email | Password |
@@ -30,7 +35,7 @@ The application is deployed and running at: **https://irishrent.onrender.com**
 
 When I arrived in Dublin as an international student, finding reliable accommodation was one of the hardest things I had to deal with. There was no single platform where I could search, compare and review properties in a trustworthy way.
 
-I built IrishRent as a proof-of-concept system inspired by Threshold — the national housing charity in Ireland(threshold.ie, Google Maps verified) — to address this real gap in the student accommodation market.
+I built IrishRent as a proof-of-concept system inspired by Threshold - the national housing charity in Ireland(threshold.ie, Google Maps verified) - to address this real gap in the student accommodation market.
 
 ---
 
@@ -45,13 +50,13 @@ IrishRent is a full-stack web application where:
 ### Core Features
 
 - Login and register system with role selection (tenant/landlord)
-- JWT authentication — token stored in localStorage, persists after refresh
-- Role-based access control — landlords, tenants and admins see different things
+- JWT authentication - token stored in localStorage, persists after refresh
+- Role-based access control - landlords, tenants and admins see different things
 - Property search and filter (area, type, price range, bedrooms)
-- Full CRUD on properties — Create, Read, Update, Delete
-- Reviews with star ratings (1-5) — one review per tenant per property
-- Bookmark system — save and remove properties from dashboard
-- Responsive design — works on desktop and mobile
+- Full CRUD on properties - Create, Read, Update, Delete
+- Reviews with star ratings (1-5) - one review per tenant per property
+- Bookmark system - save and remove properties from dashboard
+- Responsive design - works on desktop and mobile
 
 ---
 
@@ -63,23 +68,23 @@ IrishRent/
 
 │   ├── config/
 
-│   │   └── db.js              — SQLite connection, table creation
+│   │   └── db.js              - SQLite connection, table creation
 
 │   ├── controllers/
 
-│   │   ├── authController.js  — register, login, getMe, updateProfile
+│   │   ├── authController.js  - register, login, getMe, updateProfile
 
-│   │   ├── propertyController.js — full property CRUD with filters
+│   │   ├── propertyController.js - full property CRUD with filters
 
-│   │   ├── reviewController.js   — get, add, delete reviews
+│   │   ├── reviewController.js   - get, add, delete reviews
 
-│   │   └── bookmarkController.js — get, add, remove bookmarks
+│   │   └── bookmarkController.js - get, add, remove bookmarks
 
 │   ├── middleware/
 
-│   │   ├── authMiddleware.js  — JWT protect + role authorize
+│   │   ├── authMiddleware.js  - JWT protect + role authorize
 
-│   │   └── validateMiddleware.js — express-validator error handler
+│   │   └── validateMiddleware.js - express-validator error handler
 
 │   ├── routes/
 
@@ -91,11 +96,11 @@ IrishRent/
 
 │   │   └── bookmarkRoutes.js
 
-│   ├── seed.js       — manual seed for local development
+│   ├── seed.js       - manual seed for local development
 
-│   ├── seed-data.js  — auto-seed for production (Render)
+│   ├── seed-data.js  - auto-seed for production (Render)
 
-│   └── server.js     — Express app, security middleware, routes
+│   └── server.js     - Express app, security middleware, routes
 
 ├── frontend/
 
@@ -105,47 +110,47 @@ IrishRent/
 
 │   │   │   └── common/
 
-│   │   │       ├── Navbar.js       — responsive nav with auth state
+│   │   │       ├── Navbar.js       - responsive nav with auth state
 
-│   │   │       └── PrivateRoute.js — role-based route protection
+│   │   │       └── PrivateRoute.js - role-based route protection
 
 │   │   ├── context/
 
-│   │   │   └── AuthContext.js  — JWT auth state, login/logout
+│   │   │   └── AuthContext.js  - JWT auth state, login/logout
 
 │   │   ├── pages/
 
-│   │   │   ├── Home.js         — hero, featured properties, how it works
+│   │   │   ├── Home.js         - hero, featured properties, how it works
 
-│   │   │   ├── Properties.js   — listing with search and filters
+│   │   │   ├── Properties.js   - listing with search and filters
 
-│   │   │   ├── PropertyDetail.js — full info, reviews, bookmarks
+│   │   │   ├── PropertyDetail.js - full info, reviews, bookmarks
 
-│   │   │   ├── Login.js        — JWT login form
+│   │   │   ├── Login.js        - JWT login form
 
-│   │   │   ├── Register.js     — role selection + registration
+│   │   │   ├── Register.js     - role selection + registration
 
-│   │   │   ├── Dashboard.js    — role-based user dashboard
+│   │   │   ├── Dashboard.js    - role-based user dashboard
 
-│   │   │   ├── AddProperty.js  — landlord property creation form
+│   │   │   ├── AddProperty.js  - landlord property creation form
 
-│   │   │   ├── EditProperty.js — landlord property update form
+│   │   │   ├── EditProperty.js - landlord property update form
 
-│   │   │   └── NotFound.js     — 404 page
+│   │   │   └── NotFound.js     - 404 page
 
 │   │   ├── services/
 
-│   │   │   └── api.js  — axios instance, interceptors, all API calls
+│   │   │   └── api.js  - axios instance, interceptors, all API calls
 
 │   │   └── styles/
 
-│   │       └── main.css  — responsive CSS with CSS variables
+│   │       └── main.css  - responsive CSS with CSS variables
 
 │   └── .env
 
-├── render.yaml       — Render deployment configuration
+├── render.yaml       - Render deployment configuration
 
-├── package.json      — root build scripts
+├── package.json      - root build scripts
 
 └── README.md
 
@@ -157,19 +162,19 @@ IrishRent/
 - Node.js v18 or higher
 - npm
 
-### Step 1 — Clone the repository
+### Step 1 - Clone the repository
 ```bash
 git clone https://github.com/smubashir99/IrishRent.git
 cd IrishRent
 ```
 
-### Step 2 — Install backend dependencies
+### Step 2 - Install backend dependencies
 ```bash
 cd backend
 npm install
 ```
 
-### Step 3 — Create backend .env file
+### Step 3 - Create backend .env file
 ```bash
 # Create backend/.env with:
 PORT=5000
@@ -179,18 +184,18 @@ NODE_ENV=development
 CLIENT_URL=http://localhost:3000
 ```
 
-### Step 4 — Seed the database
+### Step 4 - Seed the database
 ```bash
 node seed.js
 ```
 
-### Step 5 — Start the backend
+### Step 5 - Start the backend
 ```bash
 npm run dev
 ```
 Backend runs on: http://localhost:5000
 
-### Step 6 — Install and start the frontend
+### Step 6 - Install and start the frontend
 ```bash
 cd ../frontend
 npm install
@@ -224,14 +229,14 @@ Frontend runs on: http://localhost:3000
 
 | Security Measure | Implementation |
 |---|---|
-| Authentication | JWT tokens — signed with secret, expire after 7 days |
+| Authentication | JWT tokens - signed with secret, expire after 7 days |
 | Password Hashing | bcrypt with salt rounds = 12 |
 | SQL Injection | Parameterised queries via better-sqlite3 |
 | XSS Prevention | express-validator escape() on all string inputs |
-| Security Headers | Helmet middleware — CSP, X-Frame-Options etc |
+| Security Headers | Helmet middleware - CSP, X-Frame-Options etc |
 | Rate Limiting | 100 req/15min general, 10 req/15min for auth routes |
 | CORS | Configured to allow only trusted frontend origin |
-| Authorisation | Role-based middleware — tenant/landlord/admin |
+| Authorisation | Role-based middleware - tenant/landlord/admin |
 
 ---
 
